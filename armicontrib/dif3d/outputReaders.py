@@ -32,11 +32,11 @@ import os
 
 import numpy as np
 
-from armi.nuclearDataIO import geodst, labels, rtflux, pwdint
+from armi.nuclearDataIO.cccc import geodst, labels, rtflux, pwdint
 from armi.reactor import reactors
 from armi import runLog
 
-from armi.bookkeeping.db import Database3
+from armi.bookkeeping.db import Database
 
 from .binaryIO import dif3dFile, pkedit
 from .const import SolutionType
@@ -114,7 +114,7 @@ class Dif3dReader:
         self._readPeakFluxes()
 
         if self.opts.detailedDb is not None:
-            with Database3(self.opts.detailedDb, "w") as dbo:
+            with Database(self.opts.detailedDb, "w") as dbo:
                 dbo.writeInputsToDB(self.opts.csObject)
                 dbo.writeToDB(self.r)
 
